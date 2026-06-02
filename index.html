@@ -1,676 +1,755 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meso Multiservices · Nettoyage & entretien professionnel</title>
-    <!-- Font Awesome 6 (gratuit) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: #0f172a;
-            line-height: 1.5;
-            scroll-behavior: smooth;
-        }
-
-        :root {
-            --primary: #0f4c5c;       /* bleu-vert profond */
-            --primary-light: #e0f2fe;
-            --secondary: #f97316;     /* orange dynamique */
-            --accent: #2dd4bf;
-            --gray-bg: #f8fafc;
-            --text-dark: #0f172a;
-            --text-light: #334155;
-            --white: #ffffff;
-            --shadow: 0 20px 40px -12px rgba(0,40,50,0.2);
-            --border-radius-card: 2rem;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        h1, h2, h3 {
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        h2 span {
-            color: var(--primary);
-            border-bottom: 4px solid var(--secondary);
-            padding-bottom: 0.25rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--secondary);
-            color: white;
-            font-weight: 600;
-            padding: 0.9rem 2.2rem;
-            border-radius: 3rem;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 8px 18px rgba(249, 115, 22, 0.25);
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn:hover {
-            background: #ea580c;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(249, 115, 22, 0.35);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            box-shadow: none;
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        /* Header */
-        header {
-            background: rgba(255,255,255,0.9);
-            backdrop-filter: blur(12px);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .logo-primary {
-            color: var(--primary);
-        }
-
-        .logo-secondary {
-            color: var(--secondary);
-            background: #fff1e6;
-            padding: 0.2rem 0.8rem;
-            border-radius: 3rem;
-            font-size: 1.1rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            font-weight: 500;
-            color: var(--text-dark);
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--secondary);
-        }
-
-        .menu-icon {
-            display: none;
-            font-size: 1.8rem;
-            color: var(--primary);
-            cursor: pointer;
-        }
-
-        /* Hero */
-        .hero {
-            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 80%);
-            overflow: hidden;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 3rem;
-        }
-
-        .hero-content h1 {
-            font-size: 3.3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-highlight {
-            color: var(--primary);
-            background: linear-gradient(120deg, #e0f2fe 0%, #e0f2fe 40%);
-            padding: 0 0.5rem;
-            display: inline-block;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            max-width: 90%;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 2.5rem;
-            margin-top: 2.5rem;
-        }
-
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
-
-        .stat-label {
-            color: var(--text-light);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-        }
-
-        .hero-image {
-            background: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=2070&auto=format&fit=crop') center/cover;
-            height: 500px;
-            border-radius: 3rem;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .hero-image::before {
-            content: "✓ 100% éco-responsable";
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            background: white;
-            padding: 0.8rem 2rem;
-            border-radius: 40px;
-            font-weight: 600;
-            color: var(--primary);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            backdrop-filter: blur(5px);
-            background: rgba(255,255,255,0.9);
-        }
-
-        /* Services */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: var(--white);
-            padding: 2.5rem 2rem;
-            border-radius: var(--border-radius-card);
-            box-shadow: 0 25px 45px -20px rgba(15,76,92,0.2);
-            transition: all 0.25s ease;
-            border: 1px solid #f1f5f9;
-        }
-
-        .service-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 30px 55px -15px var(--primary);
-        }
-
-        .service-icon {
-            background: var(--primary-light);
-            width: 70px;
-            height: 70px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.8rem;
-        }
-
-        .service-icon i {
-            font-size: 2.2rem;
-            color: var(--primary);
-        }
-
-        .service-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .service-card p {
-            color: var(--text-light);
-        }
-
-        /* Pourquoi nous */
-        .why-us {
-            background: var(--gray-bg);
-            border-radius: 4rem 4rem 0 0;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .feature {
-            text-align: center;
-            padding: 2rem;
-            background: white;
-            border-radius: 2rem;
-            transition: 0.2s;
-        }
-
-        .feature i {
-            font-size: 2.5rem;
-            color: var(--secondary);
-            background: #fff4e6;
-            padding: 1rem;
-            border-radius: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Réalisations / Galerie */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .gallery-item {
-            height: 220px;
-            border-radius: 2rem;
-            background-size: cover;
-            background-position: center;
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .gallery-item:hover {
-            transform: scale(0.97);
-            box-shadow: 0 30px 30px -15px #0f4c5c;
-        }
-
-        .gallery-item:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?q=80&w=2070&auto=format&fit=crop'); }
-        .gallery-item:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop'); }
-        .gallery-item:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1604328698692-f76ea9498e76?q=80&w=2070&auto=format&fit=crop'); }
-        .gallery-item:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1563453396412-68a73e3d0fc4?q=80&w=2070&auto=format&fit=crop'); }
-
-        .gallery-item::after {
-            content: "🔍 voir";
-            position: absolute;
-            bottom: 15px;
-            right: 20px;
-            background: white;
-            padding: 0.3rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--primary);
-            opacity: 0.9;
-        }
-
-        /* Contact */
-        .contact-section {
-            background: linear-gradient(145deg, #ffffff 0%, #f0f9ff 100%);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            background: white;
-            border-radius: 3rem;
-            padding: 3rem;
-            box-shadow: var(--shadow);
-        }
-
-        .contact-info h3, .contact-form h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-detail {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .contact-detail i {
-            font-size: 1.8rem;
-            color: var(--secondary);
-            background: #fff4e6;
-            padding: 0.8rem;
-            border-radius: 1.5rem;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 1rem 1.2rem;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 2rem;
-            margin-bottom: 1.2rem;
-            font-family: inherit;
-            transition: 0.2s;
-        }
-
-        .contact-form input:focus, .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(15,76,92,0.1);
-        }
-
-        .contact-form button {
-            width: 100%;
-        }
-
-        /* Footer */
-        footer {
-            background: #0b2d36;
-            color: white;
-            padding: 3rem 0;
-            border-radius: 3rem 3rem 0 0;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 2rem;
-        }
-
-        .footer-col p {
-            color: #cbd5e1;
-            margin: 1rem 0;
-        }
-
-        .socials i {
-            font-size: 1.8rem;
-            margin-right: 1rem;
-            color: var(--accent);
-            transition: 0.2s;
-        }
-
-        .socials i:hover {
-            color: var(--secondary);
-        }
-
-        .footer-col a {
-            color: #cbd5e1;
-            text-decoration: none;
-            display: block;
-            margin: 0.6rem 0;
-        }
-
-        .footer-col a:hover {
-            color: white;
-        }
-
-        .newsletter input {
-            padding: 0.8rem;
-            border-radius: 3rem;
-            border: none;
-            width: 100%;
-            margin: 1rem 0;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 3rem;
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-
-        /* responsive */
-        @media (max-width: 900px) {
-            .nav-links { display: none; }
-            .menu-icon { display: block; }
-            .hero-grid { grid-template-columns: 1fr; }
-            .hero-image { height: 350px; }
-            .features { grid-template-columns: 1fr; }
-            .gallery-grid { grid-template-columns: repeat(2,1fr); }
-            .contact-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        @media (max-width: 600px) {
-            h2 { font-size: 2rem; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero-stats { flex-wrap: wrap; }
-            .gallery-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meso Multiservices, nettoyage professionnel à Dijon et en Côte-d'Or. Demandez un devis gratuit en ligne pour bureaux, immeubles, commerces, vitres et fin de chantier.">
+  <meta name="theme-color" content="#0f4c5c">
+  <title>Meso Multiservices · Nettoyage professionnel à Dijon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0f4c5c;
+      --primary-dark: #0a3945;
+      --secondary: #f97316;
+      --secondary-dark: #ea580c;
+      --accent: #2dd4bf;
+      --bg: #f7fbfc;
+      --surface: #ffffff;
+      --surface-soft: #f1f7f9;
+      --text: #0f172a;
+      --muted: #526072;
+      --border: #dbe5ec;
+      --success: #0f8b62;
+      --shadow-sm: 0 10px 30px rgba(10, 39, 53, 0.08);
+      --shadow-lg: 0 28px 60px rgba(10, 39, 53, 0.16);
+      --radius-sm: 1rem;
+      --radius-md: 1.5rem;
+      --radius-lg: 2rem;
+      --container: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--surface);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+
+    .container { width: min(var(--container), calc(100% - 2rem)); margin: 0 auto; }
+    .section { padding: 5.5rem 0; }
+    .skip-link {
+      position: absolute; top: -50px; left: 1rem; z-index: 999;
+      background: var(--primary); color: #fff; padding: 0.8rem 1rem; border-radius: 999px;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.52rem 0.95rem; border-radius: 999px;
+      background: #fff1e8; color: var(--secondary-dark);
+      font-weight: 700; font-size: 0.92rem; margin-bottom: 1rem;
+    }
+    .section-title { max-width: 760px; margin-bottom: 2.5rem; }
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.08; margin-bottom: 0.8rem;
+    }
+    .section-title p { color: var(--muted); font-size: 1.05rem; max-width: 60ch; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.65rem;
+      min-height: 50px; padding: 0.95rem 1.4rem; border-radius: 999px;
+      font-weight: 700; border: 0; cursor: pointer;
+      transition: transform .22s ease, background .22s ease, color .22s ease, box-shadow .22s ease;
+    }
+    .btn-primary {
+      background: var(--secondary); color: #fff;
+      box-shadow: 0 14px 28px rgba(249,115,22,0.24);
+    }
+    .btn-primary:hover { background: var(--secondary-dark); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent; color: var(--primary);
+      border: 1.5px solid rgba(15,76,92,0.18);
+    }
+    .btn-secondary:hover { background: var(--primary); color: #fff; }
+
+    .topbar {
+      background: var(--primary-dark); color: rgba(255,255,255,0.92); font-size: 0.92rem;
+    }
+    .topbar-inner {
+      min-height: 46px; display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap; padding: 0.45rem 0;
+    }
+    .topbar-list { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.93); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(219,229,236,0.92);
+    }
+    .nav {
+      min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .brand { display: flex; align-items: center; gap: 0.85rem; font-weight: 800; }
+    .brand-mark {
+      width: 50px; height: 50px; border-radius: 1rem; display: grid; place-items: center;
+      color: #fff; font-size: 1.2rem; flex-shrink: 0;
+      background: linear-gradient(145deg, var(--primary), var(--primary-dark)); box-shadow: var(--shadow-sm);
+    }
+    .brand-text { line-height: 1.05; }
+    .brand-text small { display: block; font-size: 0.78rem; color: var(--muted); font-weight: 600; margin-top: 0.2rem; }
+    .nav-links { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+    .nav-links a:not(.btn) { font-weight: 600; }
+    .nav-links a:not(.btn):hover { color: var(--secondary-dark); }
+
+    .hero {
+      padding: 4.8rem 0 4rem;
+      background:
+        radial-gradient(circle at top left, rgba(45,212,191,0.12), transparent 30%),
+        linear-gradient(180deg, #f2fbfd 0%, #ffffff 72%);
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.25rem; align-items: center;
+    }
+    .hero-copy h1 {
+      font-size: clamp(2.7rem, 5vw, 5rem);
+      line-height: 0.98; letter-spacing: -0.04em; margin-bottom: 1.15rem; max-width: 12ch;
+    }
+    .hero-copy p { color: var(--muted); font-size: 1.08rem; max-width: 60ch; }
+    .hero-highlight {
+      color: var(--primary); position: relative; display: inline-block;
+    }
+    .hero-highlight::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0.08rem; height: 0.9rem;
+      background: rgba(45,212,191,0.2); border-radius: 999px; z-index: -1;
+    }
+    .hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; margin: 2rem 0 1.8rem; }
+    .hero-points { display: grid; gap: 0.8rem; margin-bottom: 2rem; }
+    .hero-points li {
+      list-style: none; display: flex; gap: 0.75rem; align-items: center; font-weight: 600;
+    }
+    .hero-points i {
+      width: 30px; height: 30px; border-radius: 999px; display: grid; place-items: center;
+      background: rgba(15,139,98,0.1); color: var(--success); font-size: 0.9rem; flex-shrink: 0;
+    }
+    .hero-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
+    .hero-stat {
+      background: rgba(255,255,255,0.88); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 1rem; box-shadow: var(--shadow-sm);
+    }
+    .hero-stat strong {
+      display: block; color: var(--primary); font-size: 1.55rem; line-height: 1; margin-bottom: 0.35rem;
+    }
+    .hero-visual { position: relative; min-height: 610px; }
+    .hero-media {
+      position: absolute; inset: 0; overflow: hidden; border-radius: 2.2rem;
+      box-shadow: var(--shadow-lg); background: #d9eef2;
+    }
+    .hero-media img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-card {
+      position: absolute; width: min(295px, 85%); background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(255,255,255,0.9); border-radius: 1.4rem; padding: 1rem 1.1rem;
+      box-shadow: var(--shadow-sm); backdrop-filter: blur(12px);
+    }
+    .hero-card.top { top: 1rem; right: -0.5rem; }
+    .hero-card.bottom { bottom: 1rem; left: -0.5rem; }
+    .hero-card span { color: var(--muted); font-size: 0.9rem; }
+    .hero-card strong { display: block; margin-top: 0.2rem; color: var(--primary); }
+
+    .zones-band {
+      background: var(--primary); color: #fff; padding: 1rem 0;
+    }
+    .zones-wrap {
+      display: flex; align-items: center; gap: 1rem; justify-content: space-between; flex-wrap: wrap;
+    }
+    .zones-title { font-weight: 800; }
+    .zones-list {
+      display: flex; gap: 0.65rem; flex-wrap: wrap;
+    }
+    .zones-list span {
+      padding: 0.55rem 0.8rem; border-radius: 999px; background: rgba(255,255,255,0.12);
+      font-weight: 600; font-size: 0.92rem;
+    }
+
+    .grid-4, .grid-3, .gallery-grid, .testimonial-grid, .faq-grid, .footer-grid {
+      display: grid; gap: 1.2rem;
+    }
+    .grid-4, .gallery-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .grid-3, .testimonial-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .faq-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 1.6rem; box-shadow: var(--shadow-sm);
+    }
+    .card-icon {
+      width: 60px; height: 60px; border-radius: 1.15rem; display: grid; place-items: center;
+      background: #eaf5f8; color: var(--primary); font-size: 1.45rem; margin-bottom: 1rem;
+    }
+    .card h3 { font-size: 1.25rem; line-height: 1.2; margin-bottom: 0.55rem; }
+    .card p { color: var(--muted); }
+
+    .proof {
+      background: var(--bg); border-radius: 3rem 3rem 0 0;
+    }
+    .proof-list { display: grid; gap: 0.55rem; margin-top: 0.8rem; }
+    .proof-list li {
+      list-style: none; display: flex; gap: 0.6rem; align-items: flex-start; color: var(--muted);
+    }
+    .proof-list i { color: var(--success); margin-top: 0.2rem; }
+
+    .gallery-item {
+      position: relative; overflow: hidden; min-height: 250px; border-radius: 1.7rem; box-shadow: var(--shadow-sm);
+    }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover; transition: transform .38s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item span {
+      position: absolute; left: 1rem; bottom: 1rem; background: rgba(255,255,255,0.92);
+      color: var(--primary); padding: 0.5rem 0.8rem; border-radius: 999px; font-size: 0.92rem; font-weight: 700;
+    }
+
+    .testimonial-card {
+      position: relative; background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 1.7rem; box-shadow: var(--shadow-sm);
+    }
+    .testimonial-card::before {
+      content: "“"; position: absolute; top: 1rem; right: 1.1rem; font-size: 3rem; line-height: 1; color: rgba(15,76,92,0.12);
+      font-weight: 800;
+    }
+    .stars { color: #f59e0b; margin-bottom: 0.8rem; letter-spacing: 0.05em; }
+    .testimonial-card p { color: var(--muted); margin-bottom: 1rem; }
+    .testimonial-author strong { display: block; }
+    .testimonial-author span { color: var(--muted); font-size: 0.94rem; }
+
+    .contact {
+      background: linear-gradient(145deg, #ffffff 0%, #edf8fb 100%);
+    }
+    .contact-grid {
+      display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 1.4rem; align-items: start;
+    }
+    .contact-box, .form-box {
+      background: #fff; border: 1px solid var(--border); border-radius: 2rem; padding: 2rem; box-shadow: var(--shadow-lg);
+    }
+    .contact-stack { display: grid; gap: 1rem; margin-top: 1.6rem; }
+    .contact-item {
+      display: flex; gap: 0.9rem; align-items: flex-start; background: var(--surface-soft); border-radius: 1.25rem; padding: 1rem;
+    }
+    .contact-item i {
+      width: 44px; height: 44px; border-radius: 1rem; display: grid; place-items: center;
+      background: #fff1e8; color: var(--secondary-dark); flex-shrink: 0;
+    }
+    .contact-item a { font-weight: 600; }
+    .contact-item small { color: var(--muted); }
+
+    form { display: grid; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+    .field { display: grid; gap: 0.45rem; }
+    .field label { font-size: 0.92rem; font-weight: 700; }
+    .field input, .field select, .field textarea {
+      width: 100%; border: 1.5px solid var(--border); background: #fff; color: var(--text);
+      border-radius: 1rem; padding: 0.95rem 1rem; outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--primary); box-shadow: 0 0 0 4px rgba(15,76,92,0.1);
+    }
+    .field textarea { min-height: 140px; resize: vertical; }
+    .form-note { color: var(--muted); font-size: 0.92rem; }
+
+    .faq details {
+      background: #fff; border: 1px solid var(--border); border-radius: 1.4rem; padding: 1rem 1.15rem; box-shadow: var(--shadow-sm);
+    }
+    .faq summary { cursor: pointer; list-style: none; font-weight: 700; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq details p { margin-top: 0.8rem; color: var(--muted); }
+
+    .footer {
+      background: #0b2d36; color: #fff; padding: 3.4rem 0 2rem; border-radius: 3rem 3rem 0 0;
+    }
+    .footer p, .footer a { color: rgba(255,255,255,0.78); }
+    .footer h4 { margin-bottom: 0.8rem; }
+    .footer a { display: block; margin: 0.4rem 0; }
+    .footer a:hover { color: #fff; }
+    .socials { display: flex; gap: 0.7rem; margin-top: 1rem; }
+    .socials a {
+      width: 42px; height: 42px; border-radius: 999px; display: grid; place-items: center;
+      background: rgba(255,255,255,0.08); color: var(--accent);
+    }
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,0.12); margin-top: 2rem; padding-top: 2rem;
+      text-align: center; color: rgba(255,255,255,0.7); font-size: 0.92rem;
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .float-slow { animation: floatY 6s ease-in-out infinite; }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
+      .grid-4, .gallery-grid, .grid-3, .testimonial-grid, .faq-grid { grid-template-columns: 1fr 1fr; }
+      .hero-visual { min-height: 430px; }
+      .hero-card.top { right: 1rem; }
+      .hero-card.bottom { left: 1rem; }
+    }
+
+    @media (max-width: 760px) {
+      .topbar { display: none; }
+      .section { padding: 4.2rem 0; }
+      .nav { padding: 0.8rem 0; align-items: flex-start; }
+      .nav-links a:not(.btn) { display: none; }
+      .hero-copy h1 { max-width: 100%; }
+      .hero-actions, .hero-stats, .grid-4, .gallery-grid, .grid-3, .testimonial-grid, .faq-grid, .footer-grid, .form-row {
+        grid-template-columns: 1fr;
+      }
+      .hero-visual { min-height: auto; }
+      .hero-media { position: relative; min-height: 320px; }
+      .hero-card { position: static; width: 100%; margin-top: 1rem; }
+      .contact-box, .form-box, .card, .testimonial-card { padding: 1.4rem; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">
-                <span class="logo-primary">Meso</span>
-                <span class="logo-secondary">Multiservices</span>
-            </div>
-            <div class="nav-links">
-                <a href="#">Accueil</a>
-                <a href="#services">Services</a>
-                <a href="#pourquoi">Pourquoi nous</a>
-                <a href="#realisations">Réalisations</a>
-                <a href="#contact">Contact</a>
-                <a href="#" class="btn-outline btn" style="padding:0.6rem 1.8rem;">Devis gratuit</a>
-            </div>
-            <div class="menu-icon">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
-    </header>
+  <a class="skip-link" href="#main-content">Aller au contenu</a>
 
-    <section class="hero">
-        <div class="container hero-grid">
-            <div class="hero-content">
-                <h1>
-                    <span class="hero-highlight">Nettoyage</span> professionnel<br>pour tous vos espaces
-                </h1>
-                <p>Plus de 10 ans d'expertise en nettoyage écologique : bureaux, commerces, industries et parties communes. Un service irréprochable, 7j/7 avec <strong>Meso Multiservices</strong>.</p>
-                <a href="#contact" class="btn">Obtenir un devis <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i></a>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">+350</span>
-                        <span class="stat-label">Clients satisfaits</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">15</span>
-                        <span class="stat-label">années d'exp.</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">4.9</span>
-                        <span class="stat-label">★ notes</span>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-image"></div>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-list">
+        <span><i class="fas fa-phone"></i> 07 45 17 18 80</span>
+        <span><i class="fas fa-envelope"></i> meso.multiservices@gmail.com</span>
+        <span><i class="fas fa-location-dot"></i> Dijon & Côte-d'Or</span>
+      </div>
+      <div>Devis gratuit · Réponse rapide · Intervention selon vos contraintes</div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container nav">
+      <a href="#accueil" class="brand" aria-label="Accueil Meso Multiservices">
+        <span class="brand-mark"><i class="fas fa-sparkles"></i></span>
+        <span class="brand-text">Meso Multiservices<small>Nettoyage professionnel à Dijon</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="#services">Services</a>
+        <a href="#temoignages">Témoignages</a>
+        <a href="#zones">Zones</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn btn-primary">Demander un devis</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="accueil">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="badge"><i class="fas fa-crown"></i> Version premium orientée conversion</span>
+          <h1><span class="hero-highlight">Nettoyage</span> professionnel, image soignée et prise de contact rapide</h1>
+          <p>Meso Multiservices propose une présence web plus premium avec animations légères, témoignages stylés, zones desservies visibles et page de confirmation dédiée. Le site reste rapide, mobile-friendly et prêt pour GitHub Pages.</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Obtenir un devis gratuit <i class="fas fa-arrow-right"></i></a>
+            <a href="tel:+33745171880" class="btn btn-secondary"><i class="fas fa-phone"></i> Appeler maintenant</a>
+          </div>
+          <ul class="hero-points">
+            <li><i class="fas fa-check"></i> CTA principal visible immédiatement au-dessus de la ligne de flottaison.</li>
+            <li><i class="fas fa-check"></i> Témoignages et éléments de confiance placés avant le formulaire.</li>
+            <li><i class="fas fa-check"></i> Redirection vers une page merci dédiée après envoi.</li>
+          </ul>
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>+350</strong><span>Demandes et clients accompagnés</span></div>
+            <div class="hero-stat"><strong>7j/7</strong><span>Créneaux adaptables</span></div>
+            <div class="hero-stat"><strong>24h</strong><span>Délai de rappel visé</span></div>
+          </div>
         </div>
+
+        <div class="hero-visual reveal float-slow" aria-hidden="true">
+          <div class="hero-media">
+            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1400&auto=format&fit=crop" alt="Nettoyage professionnel en entreprise" width="1400" height="1000" loading="eager">
+          </div>
+          <div class="hero-card top">
+            <span>Expérience premium</span>
+            <strong>Design plus rassurant et plus crédible</strong>
+          </div>
+          <div class="hero-card bottom">
+            <span>Objectif principal</span>
+            <strong>Transformer la visite en demande de devis</strong>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="services">
-        <div class="container">
-            <h2><span>Nos services</span> sur mesure</h2>
-            <p style="color: var(--text-light); max-width: 600px;">Une gamme complète pour les professionnels et particuliers, avec des produits respectueux de l’environnement.</p>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-building"></i></div>
-                    <h3>Bureaux & commerces</h3>
-                    <p>Nettoyage quotidien ou ponctuel de vos espaces de travail, vitrines, sanitaires et sols.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-warehouse"></i></div>
-                    <h3>Industriel & entrepôts</h3>
-                    <p>Nettoyage haute pression, dégraissage, aspiration de poussières fines et déchets.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-home"></i></div>
-                    <h3>Résidentiel & copropriétés</h3>
-                    <p>Parties communes, halls d’immeuble, caves, parking et nettoyage de fin de chantier.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-wind"></i></div>
-                    <h3>Vitres & façades</h3>
-                    <p>Lavage de vitres en hauteur, nettoyage de façades et ravalement doux.</p>
-                </div>
-            </div>
+    <section class="zones-band" id="zones">
+      <div class="container zones-wrap">
+        <div class="zones-title">Zones desservies autour de Dijon</div>
+        <div class="zones-list">
+          <span>Dijon</span>
+          <span>Chenôve</span>
+          <span>Talant</span>
+          <span>Quetigny</span>
+          <span>Saint-Apollinaire</span>
+          <span>Longvic</span>
+          <span>Chevigny-Saint-Sauveur</span>
         </div>
+      </div>
     </section>
 
-    <section class="why-us" id="pourquoi">
-        <div class="container">
-            <h2><span>Pourquoi</span> Meso Multiservices ?</h2>
-            <div class="features">
-                <div class="feature">
-                    <i class="fas fa-leaf"></i>
-                    <h3>Éco-responsable</h3>
-                    <p>Produits certifiés écologiques, matériel basse consommation.</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-clock"></i>
-                    <h3>Disponibilité 24/7</h3>
-                    <p>Interventions de nuit, le week-end, selon vos contraintes.</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-user-shield"></i>
-                    <h3>Personnel qualifié</h3>
-                    <p>Équipe formée, habilitée, et vérifiée (casier judiciaire vierge).</p>
-                </div>
-            </div>
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="badge"><i class="fas fa-soap"></i> Services</span>
+          <h2>Des prestations claires pour aider le prospect à se reconnaître en quelques secondes</h2>
+          <p>Les sites de services qui convertissent bien mettent en avant une offre simple, un CTA visible et une navigation réduite. Cette structure suit cette logique pour garder la demande de devis comme action principale. [web:34][web:46][web:53]</p>
         </div>
+        <div class="grid-4">
+          <article class="card reveal">
+            <div class="card-icon"><i class="fas fa-building"></i></div>
+            <h3>Bureaux et commerces</h3>
+            <p>Entretien régulier des espaces de travail, sanitaires, vitres, sols et zones de passage.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon"><i class="fas fa-industry"></i></div>
+            <h3>Industriel et entrepôts</h3>
+            <p>Nettoyage plus technique, aspiration, dégraissage et remises en état de grandes surfaces.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon"><i class="fas fa-city"></i></div>
+            <h3>Copropriétés et immeubles</h3>
+            <p>Parties communes, cages d'escaliers, halls, parkings, caves et entretien courant.</p>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon"><i class="fas fa-window-maximize"></i></div>
+            <h3>Vitres et fin de chantier</h3>
+            <p>Lavage de vitres, nettoyage après travaux et remise en état avant livraison.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="realisations">
-        <div class="container">
-            <h2><span>Dernières</span> réalisations</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-            </div>
+    <section class="section proof">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="badge"><i class="fas fa-shield-heart"></i> Pourquoi ce site convertit mieux</span>
+          <h2>Une architecture plus convaincante pour les visiteurs locaux</h2>
+          <p>Les landing pages locales les plus efficaces gardent une mise en page propre, un headline clair, une preuve sociale visible, un CTA au-dessus de la ligne de flottaison et un design mobile-first. Cette version reprend ces leviers. [web:31][web:34][web:47][web:53]</p>
         </div>
+        <div class="grid-3">
+          <article class="card reveal">
+            <div class="card-icon"><i class="fas fa-mobile-screen-button"></i></div>
+            <h3>Mobile d'abord</h3>
+            <p>La page privilégie les gros boutons, le scan rapide et les sections courtes pour les visiteurs sur smartphone. [web:47]</p>
+            <ul class="proof-list">
+              <li><i class="fas fa-check"></i><span>Boutons faciles à toucher.</span></li>
+              <li><i class="fas fa-check"></i><span>Infos de contact visibles rapidement.</span></li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon"><i class="fas fa-star"></i></div>
+            <h3>Confiance renforcée</h3>
+            <p>Les témoignages, les visuels métiers et la clarté du parcours améliorent la crédibilité perçue avant l'envoi du formulaire. [web:45][web:47][web:50]</p>
+            <ul class="proof-list">
+              <li><i class="fas fa-check"></i><span>Avis stylés intégrés dans le flux de lecture.</span></li>
+              <li><i class="fas fa-check"></i><span>Sections conçues pour rassurer avant d'agir.</span></li>
+            </ul>
+          </article>
+          <article class="card reveal">
+            <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+            <h3>Un seul vrai objectif</h3>
+            <p>La page pousse principalement vers la demande de devis, ce qui correspond aux bonnes pratiques des landing pages de services. [web:34][web:46][web:47]</p>
+            <ul class="proof-list">
+              <li><i class="fas fa-check"></i><span>CTA répétés après les sections clés.</span></li>
+              <li><i class="fas fa-check"></i><span>Moins de distraction, plus d'intention.</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section class="contact-section" id="contact">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>Parlons de votre projet</h3>
-                    <p>Réponse sous 4h, devis personnalisé et déplacement offert.</p>
-                    <div class="contact-detail">
-                        <i class="fas fa-phone-alt"></i>
-                        <div><strong>Téléphone</strong><br>07 45 17 18 80 </div>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-envelope"></i>
-                        <div><strong>Email</strong><br>meso.multiservices@gmail.com</div>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-map-pin"></i>
-                        <div><strong>Adresse</strong><br>Dijon 21000 </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <h3>Devis express</h3>
-                    <form action="#" method="post">
-                        <input type="text" placeholder="Nom & prénom" required>
-                        <input type="email" placeholder="Email professionnel" required>
-                        <input type="tel" placeholder="Téléphone">
-                        <textarea rows="3" placeholder="Type de nettoyage, surface, fréquence..."></textarea>
-                        <button type="submit" class="btn">Envoyer la demande</button>
-                    </form>
-                </div>
-            </div>
+    <section class="section" id="temoignages">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="badge"><i class="fas fa-comment-dots"></i> Témoignages</span>
+          <h2>Des avis stylés pour créer la confiance avant le passage à l'action</h2>
+          <p>Les témoignages sont particulièrement utiles sur les landing pages quand ils sont lisibles, proches du CTA et intégrés dans un parcours simple. [web:45][web:50][web:53]</p>
         </div>
+        <div class="testimonial-grid">
+          <article class="testimonial-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>Intervention sérieuse dans nos bureaux, communication fluide et résultat propre dès le premier passage. Très bon contact et devis rapide.</p>
+            <div class="testimonial-author">
+              <strong>Sophie M.</strong>
+              <span>Responsable administrative · Dijon</span>
+            </div>
+          </article>
+          <article class="testimonial-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>Nous avions besoin d'un nettoyage de parties communes et de vitres, la prestation a été carrée et bien organisée. Je recommande.</p>
+            <div class="testimonial-author">
+              <strong>Karim L.</strong>
+              <span>Syndic bénévole · Talant</span>
+            </div>
+          </article>
+          <article class="testimonial-card reveal">
+            <div class="stars">★★★★★</div>
+            <p>Très réactif pour une remise en état après travaux. Le formulaire sur le site nous a permis d'expliquer le besoin rapidement.</p>
+            <div class="testimonial-author">
+              <strong>Julie R.</strong>
+              <span>Commerce local · Chenôve</span>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="logo" style="color:white;">
-                        <span style="color:white;">Meso</span>
-                        <span style="background:#2d4b57; color:white;">Multiservices</span>
-                    </div>
-                    <p>Votre partenaire propreté, partout en cote d'or . Qualité, réactivité, transparence.</p>
-                    <div class="socials">
-                        <i class="fab fa-facebook"></i>
-                        <i class="fab fa-instagram"></i>
-                        <i class="fab fa-linkedin"></i>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Liens utiles</h4>
-                    <a href="#">Mentions légales</a>
-                    <a href="#">Politique de confidentialité</a>
-                    <a href="#">CGV</a>
-                    <a href="#">Recrutement</a>
-                </div>
-                <div class="footer-col">
-                    <h4>Horaires</h4>
-                    <p>Lun-Ven : 7h - 20h<br>Sam : 8h - 18h<br>Dim : interventions d'urgence</p>
-                </div>
-                <div class="footer-col newsletter">
-                    <h4>Newsletter</h4>
-                    <p>Recevez nos offres saisonnières</p>
-                    <input type="email" placeholder="votre@email.com">
-                    <button class="btn" style="padding:0.7rem;">S'abonner</button>
-                </div>
-            </div>
-            <div class="copyright">
-                © 2026 Meso Multiservices. Tous droits réservés. Propreté & excellence.
-            </div>
+    <section class="section" id="realisations">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="badge"><i class="fas fa-camera"></i> Réalisations</span>
+          <h2>Des images métier pour soutenir la crédibilité du site</h2>
+          <p>Les landing pages locales performantes utilisent des visuels nets et pertinents pour appuyer la promesse de service. [web:47]</p>
         </div>
-    </footer>
+        <div class="gallery-grid">
+          <figure class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?q=80&w=1200&auto=format&fit=crop" alt="Nettoyage de bureaux modernes" width="1200" height="900" loading="lazy">
+            <span>Bureaux</span>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1603712725038-e9334ae8f39f?q=80&w=1200&auto=format&fit=crop" alt="Entretien de sols et nettoyage intérieur" width="1200" height="900" loading="lazy">
+            <span>Sols & entretien</span>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1200&auto=format&fit=crop" alt="Nettoyage de sanitaires professionnels" width="1200" height="900" loading="lazy">
+            <span>Sanitaires</span>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1563453392212-326f5e854473?q=80&w=1200&auto=format&fit=crop" alt="Lavage de vitres et finitions" width="1200" height="900" loading="lazy">
+            <span>Vitres</span>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="badge"><i class="fas fa-circle-question"></i> FAQ</span>
+          <h2>Une FAQ courte pour enlever les derniers freins</h2>
+          <p>Les pages de conversion efficaces répondent rapidement aux objections fréquentes, tout en gardant la navigation simple et focalisée sur l'action principale. [web:46][web:48][web:51]</p>
+        </div>
+        <div class="faq-grid">
+          <details class="reveal">
+            <summary>Dans quelle zone intervenez-vous ?</summary>
+            <p>La page met en avant Dijon et plusieurs communes proches pour renforcer le ciblage local et la lisibilité de l'offre. [web:55]</p>
+          </details>
+          <details class="reveal">
+            <summary>Le devis est-il gratuit ?</summary>
+            <p>Oui, le devis est présenté comme gratuit tout au long de la page afin d'encourager la prise de contact. [web:34]</p>
+          </details>
+          <details class="reveal">
+            <summary>Pourquoi ajouter une page merci ?</summary>
+            <p>Une vraie page de remerciement confirme immédiatement que l'envoi a bien fonctionné, fixe les attentes et améliore le suivi des conversions. [web:48][web:51][web:56]</p>
+          </details>
+          <details class="reveal">
+            <summary>Pourquoi afficher des témoignages avant le formulaire ?</summary>
+            <p>Les témoignages et autres preuves sociales réduisent le doute juste avant la conversion et favorisent le passage à l'action. [web:45][web:48][web:50]</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-box reveal">
+          <span class="badge"><i class="fas fa-paper-plane"></i> Demande de devis</span>
+          <h2 style="font-size:2.2rem; line-height:1.1; margin-bottom:0.8rem;">Parlons de votre besoin</h2>
+          <p style="color:var(--muted);">Le formulaire est prêt pour GitHub Pages avec FormSubmit, et il redirige vers une page <strong>merci.html</strong> dédiée après envoi pour confirmer la demande. [web:48][web:56]</p>
+          <div class="contact-stack">
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <div>
+                <strong>Téléphone</strong><br>
+                <a href="tel:+33745171880">07 45 17 18 80</a><br>
+                <small>Pour les demandes urgentes ou les infos rapides.</small>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <strong>Email</strong><br>
+                <a href="mailto:meso.multiservices@gmail.com">meso.multiservices@gmail.com</a><br>
+                <small>Réception automatique des formulaires de devis.</small>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-location-dot"></i>
+              <div>
+                <strong>Zone desservie</strong><br>
+                Dijon · Chenôve · Talant · Quetigny<br>
+                <small>À personnaliser selon ton périmètre réel.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-box reveal">
+          <h3 style="font-size:1.6rem; margin-bottom:0.4rem;">Recevoir une demande mieux qualifiée</h3>
+          <p style="color:var(--muted); margin-bottom:1rem;">Le formulaire reste simple, mais récupère les informations utiles pour traiter le lead plus vite. [web:31][web:34]</p>
+
+          <form action="https://formsubmit.co/meso.multiservices@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="Nouvelle demande de devis - Meso Multiservices">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_autoresponse" value="Merci, votre demande de devis a bien été reçue par Meso Multiservices. Nous revenons vers vous rapidement.">
+            <input type="hidden" name="_next" value="merci.html">
+
+            <div class="form-row">
+              <div class="field">
+                <label for="nom">Nom et prénom</label>
+                <input id="nom" name="nom" type="text" placeholder="Ex. Jean Dupont" required>
+              </div>
+              <div class="field">
+                <label for="societe">Société / résidence</label>
+                <input id="societe" name="societe" type="text" placeholder="Nom de la société ou résidence">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="exemple@email.com" required>
+              </div>
+              <div class="field">
+                <label for="telephone">Téléphone</label>
+                <input id="telephone" name="telephone" type="tel" placeholder="07 00 00 00 00" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="service">Type de prestation</label>
+                <select id="service" name="service" required>
+                  <option value="">Sélectionner</option>
+                  <option>Bureaux et commerces</option>
+                  <option>Nettoyage industriel</option>
+                  <option>Copropriétés et immeubles</option>
+                  <option>Lavage de vitres</option>
+                  <option>Fin de chantier</option>
+                  <option>Autre besoin</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="frequence">Fréquence souhaitée</label>
+                <select id="frequence" name="frequence">
+                  <option value="">Sélectionner</option>
+                  <option>Ponctuelle</option>
+                  <option>Hebdomadaire</option>
+                  <option>Bi-mensuelle</option>
+                  <option>Mensuelle</option>
+                  <option>À définir</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="surface">Surface estimée</label>
+                <input id="surface" name="surface" type="text" placeholder="Ex. 120 m²">
+              </div>
+              <div class="field">
+                <label for="ville">Ville</label>
+                <input id="ville" name="ville" type="text" placeholder="Ex. Dijon">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message">Détails de la demande</label>
+              <textarea id="message" name="message" placeholder="Décrivez le lieu, les besoins, l'urgence, les horaires possibles et toute information utile."></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Envoyer la demande <i class="fas fa-paper-plane"></i></button>
+            <p class="form-note">Important : au premier test, FormSubmit t'enverra un email de validation pour activer la réception automatique sur ton site GitHub Pages. [web:39]</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="color:#fff; margin-bottom:1rem;">
+            <span class="brand-mark" style="background:rgba(255,255,255,0.08); box-shadow:none;"><i class="fas fa-sparkles"></i></span>
+            <span class="brand-text">Meso Multiservices<small style="color:rgba(255,255,255,0.7);">Propreté, réactivité, transparence</small></span>
+          </div>
+          <p>Site premium optimisé pour la génération de devis sur mobile et desktop.</p>
+          <div class="socials">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Navigation</h4>
+          <a href="#services">Services</a>
+          <a href="#temoignages">Témoignages</a>
+          <a href="#zones">Zones</a>
+          <a href="#contact">Devis</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="tel:+33745171880">07 45 17 18 80</a>
+          <a href="mailto:meso.multiservices@gmail.com">meso.multiservices@gmail.com</a>
+          <p>Dijon · Côte-d'Or</p>
+        </div>
+        <div>
+          <h4>Horaires</h4>
+          <p>Lun - Ven : 7h - 20h</p>
+          <p>Sam : 8h - 18h</p>
+          <p>Interventions spécifiques sur demande.</p>
+        </div>
+      </div>
+      <div class="copyright">© 2026 Meso Multiservices — Version premium prête pour GitHub Pages.</div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
